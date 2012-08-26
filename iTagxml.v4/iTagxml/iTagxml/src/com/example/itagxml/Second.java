@@ -9,6 +9,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class Second extends BaseActivity{
@@ -20,11 +22,12 @@ public class Second extends BaseActivity{
 	private TextView number;
 	private Tagdb tagdb=new Tagdb(this);
 	private Cursor mycursor;
+	private ListView listview=null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// TODO 锟皆讹拷锟斤拷傻姆锟斤拷锟斤拷锟斤拷
+		// TODO 閿熺殕璁规嫹閿熸枻鎷峰偦濮嗛敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.second);
 		
@@ -32,12 +35,13 @@ public class Second extends BaseActivity{
 		b2 = (Button) findViewById(R.id.button2);
 		tag = (TextView) findViewById(R.id.textView1);
 		number = (TextView) findViewById(R.id.textView2);
+		listview = (ListView) findViewById(R.id.listView1);
 		
-		//锟斤拷锟截的接匡拷
+		//閿熸枻鎷烽敓鎴殑鎺ュ尅鎷�
 		b1.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				// TODO 锟皆讹拷锟斤拷傻姆锟斤拷锟斤拷锟斤拷
+				// TODO 閿熺殕璁规嫹閿熸枻鎷峰偦濮嗛敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
 				Intent intent = new Intent();
 				intent.setClass(Second.this, MainActivity.class);
 				startActivity(intent);
@@ -45,29 +49,28 @@ public class Second extends BaseActivity{
 			}
 		});
 		
-		//锟斤拷锟斤拷慕涌锟�
+		//閿熸枻鎷烽敓鏂ゆ嫹鎱曟秾閿燂拷
 		b2.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				// TODO 锟皆讹拷锟斤拷傻姆锟斤拷锟斤拷锟斤拷
+				// TODO 閿熺殕璁规嫹閿熸枻鎷峰偦濮嗛敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
 				
 			}
 		});
 		
 		iv = (ImageView) findViewById(R.id.imageView2);
-		
-		//从数据库中拿出tag
-		String sql="select * tag from tagdb";
-		//if(tagdb.getReadableDatabase().execSQL(sql))
 		mycursor=tagdb.select();
-		tag.setText(mycursor.getString(1));
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.list,mycursor,
+				new String[]{ tagdb.tag },new int[]{ R.id.textView1 });
+		listview.setAdapter(adapter);
 		
-		//统计number
+		
+		//缁熻number
 		
 		iv.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				// TODO 锟皆讹拷锟斤拷傻姆锟斤拷锟斤拷锟斤拷
+				// TODO 閿熺殕璁规嫹閿熸枻鎷峰偦濮嗛敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
 				Intent intent = new Intent();
 				intent.setClass(Second.this, Third.class);
 				startActivity(intent);

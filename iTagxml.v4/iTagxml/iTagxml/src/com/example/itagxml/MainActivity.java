@@ -40,10 +40,10 @@ public class MainActivity extends BaseActivity {
         b1 = (Button) findViewById(R.id.button1);
         b2 = (Button) findViewById(R.id.button2);
         b3 = (Button) findViewById(R.id.button3);
-        String pid="1123112";
-        String pt="ergete";
-        tagdb.getWritableDatabase().execSQL("insert into tagdb values (null, ?, ?)", this.getStringArray(pid,pt));
-        Log.e("success", pt);
+     
+
+        //tagdb.getWritableDatabase().execSQL("insert into tagdb values (null, ?, ?)", this.getStringArray(pid,pt));
+       
         //Toast.makeText(this, this.getStringArray(pid,pt), 1).show();
         b2.setOnClickListener(new OnClickListener() {
 			

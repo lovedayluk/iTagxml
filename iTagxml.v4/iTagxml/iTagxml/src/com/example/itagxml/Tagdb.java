@@ -11,6 +11,8 @@ public class Tagdb extends SQLiteOpenHelper {
 	private final static int version = 1;
 	private final String CREATE_TABLE_SQL = "create table tagdb (_id integer primary key, "
 			+ "tag, uri)";
+	public final String tag = "tag";
+	public final String uri = "uri";
 
 	public Tagdb(Context context) {
 		super(context, name,null, version);
@@ -32,9 +34,24 @@ public class Tagdb extends SQLiteOpenHelper {
 	public Cursor select() {
 		
 		SQLiteDatabase db=this.getReadableDatabase();
-		Cursor cursor = db.query(name, null, null, null, null, null, null);
+		Cursor cursor = db.rawQuery("SELECT DISTINCT tag FROM tagdb",null);
 		return cursor;
 
 	}
+public Cursor select_uri(String uri) {
+		
+		SQLiteDatabase db=this.getReadableDatabase();
+		Cursor cursor = db.rawQuery("SELECT DISTINCT tag FROM tagdb WHERE uri = "+uri,null);  
+		return cursor;
+
+	}
+
+public Cursor select_tag(String tag) {
+	
+	SQLiteDatabase db=this.getReadableDatabase();
+	Cursor cursor = db.rawQuery("SELECT DISTINCT uri FROM tagdb WHERE tag = ?", new String[]{tag});  
+	return cursor;
+
+}
 
 }
